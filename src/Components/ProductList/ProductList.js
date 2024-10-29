@@ -4,7 +4,8 @@ import "./ProductList.scss";
 const ProductList = () => {
   //   const baseURL = process.env.REACT_API_URL;
   const [productList, setProductList] = useState([]);
-  useEffect(() => {
+
+  const handleProductList = () => {
     axios
       .get(`http://localhost:8080/products`, {
         params: {
@@ -17,7 +18,8 @@ const ProductList = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
+
   if (productList.length) {
     return (
       <div>
