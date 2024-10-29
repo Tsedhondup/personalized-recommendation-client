@@ -7,6 +7,8 @@ const SearchForm = (props) => {
     setProductName(e.target.value);
   };
   const handleFormSubmission = () => {
+    props.setProductLists([]);
+
     axios
       .get(`http://localhost:8080/products`, {
         params: {
