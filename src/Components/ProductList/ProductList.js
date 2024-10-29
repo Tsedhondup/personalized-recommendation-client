@@ -1,30 +1,12 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import "./ProductList.scss";
-const ProductList = () => {
+const ProductList = (props) => {
   //   const baseURL = process.env.REACT_API_URL;
-  const [productList, setProductList] = useState([]);
 
-  const handleProductList = () => {
-    axios
-      .get(`http://localhost:8080/products`, {
-        params: {
-          productName: "ramen",
-        },
-      })
-      .then((respond) => {
-        setProductList(respond.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  if (productList.length) {
+  if (props.productLists.length > 0) {
     return (
       <div>
         <div className="products">
-          {productList.map((item) => {
+          {props.productLists.map((item) => {
             return (
               <div key={item.position} className="">
                 <h1>{item.title}</h1>
@@ -50,11 +32,9 @@ const ProductList = () => {
     );
   } else {
     return (
-      <>
-        <di>
-          <h1>Loading.....</h1>
-        </di>
-      </>
+      <div>
+        <h1>Loading.....</h1>
+      </div>
     );
   }
 };
