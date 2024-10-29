@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.source-icon {
+  object-fit: contain;
+  width: 30px;
+  height: 30px;
+}
