@@ -8,7 +8,6 @@ const SearchForm = (props) => {
   };
   const handleFormSubmission = () => {
     props.setProductLists([]);
-
     axios
       .get(`http://localhost:8080/products`, {
         params: {
@@ -38,7 +37,7 @@ const SearchForm = (props) => {
             handleProductName(e);
           }}
         ></input>
-        <button onClick={handleFormSubmission}>Search</button>
+        <button type="submit">Search</button>
       </form>
     </div>
   );
