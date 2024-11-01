@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import "./SearchForm.scss";
 
 const SearchForm = (props) => {
   const [productName, setProductName] = useState(""); // Controll form should not have undefined value initialy
@@ -25,19 +26,23 @@ const SearchForm = (props) => {
   return (
     <div>
       <form
+        className="form"
         onSubmit={(event) => {
           event.preventDefault();
           handleFormSubmission();
         }}
       >
         <input
+          className="form__input"
           type="text"
           value={productName}
           onChange={(e) => {
             handleProductName(e);
           }}
         ></input>
-        <button type="submit">Search</button>
+        <button type="submit" className="form__button">
+          Search
+        </button>
       </form>
     </div>
   );

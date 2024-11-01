@@ -1,0 +1,10 @@
+.form {
+  margin: 10px auto;
+  &__input {
+    padding: 5px;
+    height: 40px;
+  }
+  &__button {
+    height: 40px;
+  }
+}
