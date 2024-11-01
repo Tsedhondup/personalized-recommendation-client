@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.recommendations {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  padding: 10px 40px;
+  border-top: 1px solid #000;
+  gap: 10px;
+  &__item {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    &--thumbnail {
+      display: block;
+      object-fit: contain;
+      //   height: 100px;
+      max-width: 200px;
+    }
+    &--logo {
+      object-fit: contain;
+      height: 30px;
+    }
+  }
+}
