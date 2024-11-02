@@ -4,7 +4,16 @@ import { useParams, Link } from "react-router-dom";
 const ProductDetails = () => {
   const [productLists, setProductLists] = useState([]);
   const { productId } = useParams();
-
+  // CREATE/UPDATE PREFERENCE SCORE
+  const handlePreferences = (productName) => {
+    axios
+      .post(`http://localhost:8080/preferences`, {
+        productName: productName.toLocaleLowerCase(),
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     axios
       .get(`http://localhost:8080/currentData`)
@@ -37,11 +46,28 @@ const ProductDetails = () => {
                       href={item.product_link}
                       target="_blank"
                       rel="noreferrer"
+                      onClick={() => {
+                        handlePreferences(item.title);
+                      }}
                     >
                       Buy
                     </a>
                     <h2>{`Delivery: ${item.delivery}`}</h2>
-                    <h2>{item.reviews}</h2>
+                    <h2>{`Reviews: ${item.reviews}`}</h2>
+                    <button
+                      onClick={() => {
+                        handlePreferences(item.title);
+                      }}
+                    >
+                      Add to card
+                    </button>
+                    <button
+                      onClick={() => {
+                        handlePreferences(item.title);
+                      }}
+                    >
+                      like
+                    </button>
                   </div>
                 </div>
               );
@@ -56,6 +82,9 @@ const ProductDetails = () => {
                   to={`/${item.product_id}`}
                   key={item.product_id}
                   className=""
+                  onClick={() => {
+                    handlePreferences(item.title);
+                  }}
                 >
                   <img
                     src={item.thumbnail}
