@@ -4,6 +4,17 @@ import axios from "axios";
 import "./ProductList.scss";
 const ProductList = (props) => {
   const [currentProductLists, setCurrentProductLists] = useState([]);
+
+  // CREATE/UPDATE PREFERENCE SCORE
+  const handlePreferences = (productName) => {
+    axios
+      .post(`http://localhost:8080/preferences`, {
+        productName: productName.toLocaleLowerCase(),
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     axios
       .get(`http://localhost:8080/currentData`)
@@ -24,6 +35,9 @@ const ProductList = (props) => {
                 to={`/${item.product_id}`}
                 key={item.product_id}
                 className=""
+                onClick={() => {
+                  handlePreferences(item.title);
+                }}
               >
                 <h1>{item.title}</h1>
                 <img
@@ -57,6 +71,9 @@ const ProductList = (props) => {
                 to={`/${item.product_id}`}
                 key={item.product_id}
                 className=""
+                onClick={() => {
+                  handlePreferences(item.title);
+                }}
               >
                 <img
                   src={item.thumbnail}
