@@ -4,6 +4,7 @@
   padding: 0;
 }
 .products {
+  max-width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   padding: 0px 40px;
@@ -16,6 +17,7 @@
 .product-image {
   object-fit: contain;
   height: 200px;
+  width: 200px;
 }
 h1 {
   font-size: 18px;

@@ -1,10 +1,15 @@
 .form {
-  margin: 10px auto;
+  max-width: 100%;
+  padding: 16px;
+  margin: 0px auto;
+  background-color: lightgrey;
+
   &__input {
     padding: 5px;
     height: 40px;
   }
   &__button {
     height: 40px;
+    padding: 4px;
   }
 }

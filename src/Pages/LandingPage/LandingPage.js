@@ -10,7 +10,7 @@ const LandingPage = () => {
     <div>
       <SearchForm setProductLists={setProductLists} />
       <ProductList productLists={productLists} />
-      <RecommendationLists />
+      {/* <RecommendationLists /> */}
     </div>
   );
 };

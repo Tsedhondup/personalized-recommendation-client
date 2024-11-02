@@ -12,7 +12,7 @@ const SearchForm = (props) => {
     axios
       .get(`http://localhost:8080/products`, {
         params: {
-          productName: productName,
+          productName: productName.toLocaleLowerCase(),
         },
       })
       .then((respond) => {

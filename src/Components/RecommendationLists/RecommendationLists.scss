@@ -8,7 +8,7 @@
   grid-template-columns: repeat(10, 1fr);
   padding: 10px 40px;
   border-top: 1px solid #000;
-  gap: 10px;
+  gap: 50px;
   &__item {
     display: block;
     text-decoration: none;
@@ -16,8 +16,8 @@
     &--thumbnail {
       display: block;
       object-fit: contain;
-      //   height: 100px;
-      max-width: 200px;
+      height: 150px;
+      max-width: 150px;
     }
     &--logo {
       object-fit: contain;

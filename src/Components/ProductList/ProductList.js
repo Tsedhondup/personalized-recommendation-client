@@ -50,12 +50,12 @@ const ProductList = (props) => {
           {currentProductLists.map((item) => {
             return (
               <div key={item.position} className="">
-                <h1>{item.title}</h1>
                 <img
                   src={item.thumbnail}
                   alt={item.title}
                   className="product-image"
                 />
+                <h1>{item.title}</h1>
                 <h2>price: {item.price}</h2>
                 <h2>
                   {item.source}
