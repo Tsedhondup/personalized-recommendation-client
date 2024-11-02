@@ -9,7 +9,6 @@ const ProductList = (props) => {
       .get(`http://localhost:8080/currentData`)
       .then((respond) => {
         setCurrentProductLists(respond.data.parsedData);
-        console.log(respond.data.parsedData);
       })
       .catch((err) => {
         console.log(err);
@@ -21,7 +20,11 @@ const ProductList = (props) => {
         <div className="products">
           {props.productLists.map((item) => {
             return (
-              <Link to={`/${item.id}`} key={item.id} className="">
+              <Link
+                to={`/${item.product_id}`}
+                key={item.product_id}
+                className=""
+              >
                 <h1>{item.title}</h1>
                 <img
                   src={item.thumbnail}
@@ -50,7 +53,11 @@ const ProductList = (props) => {
         <div className="products">
           {currentProductLists.map((item) => {
             return (
-              <Link to={`/${item.id}`} key={item.id} className="">
+              <Link
+                to={`/${item.product_id}`}
+                key={item.product_id}
+                className=""
+              >
                 <img
                   src={item.thumbnail}
                   alt={item.title}
