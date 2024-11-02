@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./ProductList.scss";
 const ProductList = (props) => {
@@ -20,7 +21,7 @@ const ProductList = (props) => {
         <div className="products">
           {props.productLists.map((item) => {
             return (
-              <div key={item.position} className="">
+              <Link to={`/${item.id}`} key={item.id} className="">
                 <h1>{item.title}</h1>
                 <img
                   src={item.thumbnail}
@@ -36,7 +37,7 @@ const ProductList = (props) => {
                     className="source-icon"
                   />
                 </h2>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -49,7 +50,7 @@ const ProductList = (props) => {
         <div className="products">
           {currentProductLists.map((item) => {
             return (
-              <div key={item.position} className="">
+              <Link to={`/${item.id}`} key={item.id} className="">
                 <img
                   src={item.thumbnail}
                   alt={item.title}
@@ -65,7 +66,7 @@ const ProductList = (props) => {
                     className="source-icon"
                   />
                 </h2>
-              </div>
+              </Link>
             );
           })}
         </div>
