@@ -7,6 +7,7 @@ const PreferencesFormPage = () => {
   const [preferedProducts, setPreferedProducts] = useState([]);
   const [picksHeaderClass, setPicksHeaderClass] = useState("");
   const [typeInput, setTypeInput] = useState("");
+  const [agreementElClass, setAgreementELClass] = useState("");
   // HANDLE PRODUCT TYPES
   const handleProductTypes = (productType) => {
     const currentProducTypes = [...preferedProducts];
@@ -26,6 +27,11 @@ const PreferencesFormPage = () => {
   const handleTypeInputValue = (event) => {
     const productType = event.target.value;
     setTypeInput(productType); // set input state variable
+  };
+
+  // HANDLE AGREEMENT ELEMENT CLASS
+  const handleAgreementElClass = () => {
+    setAgreementELClass("js-agreement-show");
   };
   // PRODUCT TYPE
   const productTypes = [
@@ -71,7 +77,7 @@ const PreferencesFormPage = () => {
           </button>
         </form>
         <div className="type-container__picks">
-          <h2 className={`${picksHeaderClass}type-container__picks-header`}>
+          <h2 className={`${picksHeaderClass} type-container__picks-header`}>
             Your picks!
           </h2>
 
@@ -100,10 +106,22 @@ const PreferencesFormPage = () => {
         </ul>
         {/* ADD PREFEREENCES AND START SHOPPING */}
         <div>
-          <button>continue</button>
-          <button>skip</button>
+          <button
+            onClick={() => {
+              handleAgreementElClass();
+            }}
+          >
+            continue
+          </button>
+          <button
+            onClick={() => {
+              navigate("/shop");
+            }}
+          >
+            skip
+          </button>
         </div>
-        <div className="agreement-container">
+        <div className={`${agreementElClass} agreement-container`}>
           <div className="agreement-container__content">
             <h2 className="agreement-container__header">
               Your preferences will be cleared upon closing the current browser
@@ -131,13 +149,5 @@ const PreferencesFormPage = () => {
       </div>
     );
   }
-  // Welcome Message
-  // see if the user already fill the form using data in session storage
-  // if already filled, navigate to shopping page
-  // if not, render form and let user pick or choose product type and preferences
-  // once click on finish form button
-  // promt message saying "Data are only valid during current session and
-  // they will erased once the brower closed"
-  // click on okay/continue shoping will navigate to shopping page
 };
 export default PreferencesFormPage;

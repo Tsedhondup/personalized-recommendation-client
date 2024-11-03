@@ -1,10 +1,12 @@
 .type-container {
+  
   &__picks {
     &--item {
       display: inline;
       border: 1px solid #000;
       border-radius: 4px;
       padding: 5px;
+   
     }
   }
   &__picks-header {
@@ -20,9 +22,7 @@
 
 .agreement-container {
   background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: none;
   height: 100vh;
   width: 100%;
   position: fixed;
@@ -48,4 +48,9 @@
       border-radius: 4px;
     }
   }
+}
+.js-agreement-show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
