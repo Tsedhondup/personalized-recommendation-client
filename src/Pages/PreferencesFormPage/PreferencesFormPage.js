@@ -6,6 +6,7 @@ const PreferencesFormPage = () => {
   const [isFormFilled, setIsFormFilled] = useState(false);
   const [preferedProducts, setPreferedProducts] = useState([]);
   const [picksHeaderClass, setPicksHeaderClass] = useState("");
+  const [typeInput, setTypeInput] = useState("");
   // HANDLE PRODUCT TYPES
   const handleProductTypes = (productType) => {
     const currentProducTypes = [...preferedProducts];
@@ -21,6 +22,12 @@ const PreferencesFormPage = () => {
       : setPicksHeaderClass("");
   };
 
+  // HANDLE TYPE INPUT VALUE
+  const handleTypeInputValue = (event) => {
+    const productType = event.target.value;
+    setTypeInput(productType); // set input state variable
+    handleProductTypes(productType); // update product type array
+  };
   // PRODUCT TYPE
   const productTypes = [
     "Electronics",
@@ -43,6 +50,17 @@ const PreferencesFormPage = () => {
     return (
       <div className="type-container">
         <h1>Please tell us what you like!</h1>
+        <form>
+          <input
+            type="text"
+            value={typeInput}
+            placeholder="Search types"
+            onChange={(event) => {
+              handleTypeInputValue(event);
+            }}
+          ></input>
+          <button>add</button>
+        </form>
         <div className="type-container__picks">
           <h2 className={`${picksHeaderClass}type-container__picks-header`}>
             Your picks!
