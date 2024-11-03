@@ -4,7 +4,7 @@ import { useState } from "react";
 import ProductList from "../../Components/ProductList/ProductList";
 import RecommendationLists from "../../Components/RecommendationLists/RecommendationLists";
 
-const LandingPage = () => {
+const ShoppingPage = () => {
   const [productLists, setProductLists] = useState([]);
   return (
     <div>
@@ -14,4 +14,4 @@ const LandingPage = () => {
     </div>
   );
 };
-export default LandingPage;
+export default ShoppingPage;
