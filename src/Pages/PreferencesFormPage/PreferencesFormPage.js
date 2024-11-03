@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./PreferencesFormPage.scss";
 const PreferencesFormPage = () => {
   const navigate = useNavigate();
   const [hasWelcomed, setHasWelcomed] = useState(false);
-  const [isFormFilled, setIsFormFilled] = useState(false);
   const [preferedProducts, setPreferedProducts] = useState([]);
   const [picksHeaderClass, setPicksHeaderClass] = useState("");
   const [typeInput, setTypeInput] = useState("");
@@ -104,12 +103,15 @@ const PreferencesFormPage = () => {
           <button>continue</button>
           <button>skip</button>
         </div>
-        <div>
-          <h2>
-            Your preferences will be cleared upon closing the current browser
-            tab
-            <div>
+        <div className="agreement-container">
+          <div className="agreement-container__content">
+            <h2 className="agreement-container__header">
+              Your preferences will be cleared upon closing the current browser
+              tab
+            </h2>
+            <div className="agreement-container__button-container">
               <button
+                className="agreement-container__button-container--button"
                 onClick={() => {
                   navigate("/shop");
                 }}
@@ -117,7 +119,7 @@ const PreferencesFormPage = () => {
                 continue
               </button>
             </div>
-          </h2>
+          </div>
         </div>
       </div>
     );
