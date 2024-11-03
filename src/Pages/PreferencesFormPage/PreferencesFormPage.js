@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./PreferencesFormPage.scss";
 const PreferencesFormPage = () => {
+  const navigate = useNavigate();
   const [hasWelcomed, setHasWelcomed] = useState(false);
   const [isFormFilled, setIsFormFilled] = useState(false);
   const [preferedProducts, setPreferedProducts] = useState([]);
@@ -98,6 +99,26 @@ const PreferencesFormPage = () => {
             );
           })}
         </ul>
+        {/* ADD PREFEREENCES AND START SHOPPING */}
+        <div>
+          <button>continue</button>
+          <button>skip</button>
+        </div>
+        <div>
+          <h2>
+            Your preferences will be cleared upon closing the current browser
+            tab
+            <div>
+              <button
+                onClick={() => {
+                  navigate("/shop");
+                }}
+              >
+                continue
+              </button>
+            </div>
+          </h2>
+        </div>
       </div>
     );
   }
