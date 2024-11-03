@@ -26,7 +26,6 @@ const PreferencesFormPage = () => {
   const handleTypeInputValue = (event) => {
     const productType = event.target.value;
     setTypeInput(productType); // set input state variable
-    handleProductTypes(productType); // update product type array
   };
   // PRODUCT TYPE
   const productTypes = [
@@ -50,7 +49,11 @@ const PreferencesFormPage = () => {
     return (
       <div className="type-container">
         <h1>Please tell us what you like!</h1>
-        <form>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+          }}
+        >
           <input
             type="text"
             value={typeInput}
@@ -59,7 +62,13 @@ const PreferencesFormPage = () => {
               handleTypeInputValue(event);
             }}
           ></input>
-          <button>add</button>
+          <button
+            onClick={() => {
+              handleProductTypes(typeInput);
+            }}
+          >
+            add
+          </button>
         </form>
         <div className="type-container__picks">
           <h2 className={`${picksHeaderClass}type-container__picks-header`}>
