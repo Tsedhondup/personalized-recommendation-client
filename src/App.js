@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
+import PreferencesFormPage from "./Pages/PreferencesFormPage/PreferencesFormPage";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 function App() {

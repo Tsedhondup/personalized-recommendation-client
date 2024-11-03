@@ -25,6 +25,9 @@ const ProductDetails = () => {
       });
   }, []);
 
+  useEffect(() => {  
+    window.scrollTo(0, 0);
+  }, []);
   if (productLists.length > 0) {
     return (
       <div className="product-detail">
