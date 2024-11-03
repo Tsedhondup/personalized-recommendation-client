@@ -7,4 +7,11 @@
       padding: 5px;
     }
   }
+  &__picks-header {
+    display: none;
+  }
+  // JS DYNAMIC WEBSITE
+  .js-pick-header {
+    display: block;
+  }
 }

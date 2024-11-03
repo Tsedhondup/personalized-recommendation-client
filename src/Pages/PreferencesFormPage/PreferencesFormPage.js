@@ -5,7 +5,7 @@ const PreferencesFormPage = () => {
   const [hasWelcomed, setHasWelcomed] = useState(false);
   const [isFormFilled, setIsFormFilled] = useState(false);
   const [preferedProducts, setPreferedProducts] = useState([]);
-
+  const [picksHeaderClass, setPicksHeaderClass] = useState("");
   // HANDLE PRODUCT TYPES
   const handleProductTypes = (productType) => {
     const currentProducTypes = [...preferedProducts];
@@ -15,7 +15,12 @@ const PreferencesFormPage = () => {
       currentProducTypes.push(productType);
       setPreferedProducts(currentProducTypes);
     }
+    // TOGGLE PICKS HEADER CLASS
+    currentProducTypes.length > 0
+      ? setPicksHeaderClass("js-pick-header")
+      : setPicksHeaderClass("");
   };
+
   // PRODUCT TYPE
   const productTypes = [
     "Electronics",
@@ -38,8 +43,11 @@ const PreferencesFormPage = () => {
     return (
       <div className="type-container">
         <h1>Please tell us what you like!</h1>
-        <h2 className="type-container__pick-header">Your picks!</h2>
         <div className="type-container__picks">
+          <h2 className={`${picksHeaderClass}type-container__picks-header`}>
+            Your picks!
+          </h2>
+
           {preferedProducts.map((item, index) => {
             return (
               <p key={index} className="type-container__picks--item">
@@ -48,6 +56,7 @@ const PreferencesFormPage = () => {
             );
           })}
         </div>
+        {/* PRODUCT TYPES */}
         <ul>
           {productTypes.map((item, index) => {
             return (
