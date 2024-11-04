@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./PreferencesFormPage.scss";
 const PreferencesFormPage = () => {
   const navigate = useNavigate();
@@ -32,6 +33,27 @@ const PreferencesFormPage = () => {
   // HANDLE AGREEMENT ELEMENT CLASS
   const handleAgreementElClass = () => {
     setAgreementELClass("js-agreement-show");
+  };
+  const handlePreferencesPost = (productName) => {
+    // ADD PREFERENCE SCORE TO PRODUCT TYPE
+    const customProductTypes = preferedProducts.map((item) => {
+      const productObject = {
+        preferenceScore: 1,
+        productName: item.toLocaleLowerCase(),
+      };
+      return productObject;
+    });
+    axios
+      .post(`http://localhost:8080/addCustomPreferences`, customProductTypes)
+      .then((respond) => {
+        return respond;
+      })
+      .then(() => {
+        navigate("/shop");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   // PRODUCT TYPE
   const productTypes = [
@@ -111,7 +133,7 @@ const PreferencesFormPage = () => {
               handleAgreementElClass();
             }}
           >
-            continue
+            add
           </button>
           <button
             onClick={() => {
@@ -131,7 +153,7 @@ const PreferencesFormPage = () => {
               <button
                 className="agreement-container__button-container--button"
                 onClick={() => {
-                  navigate("/shop");
+                  handlePreferencesPost();
                 }}
               >
                 continue
