@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./PreferencesFormPage.scss";
+import { productTypes } from "../../utilities/productType";
 const PreferencesFormPage = () => {
   const navigate = useNavigate();
   const [hasWelcomed, setHasWelcomed] = useState(false);
@@ -55,19 +56,7 @@ const PreferencesFormPage = () => {
         console.log(err);
       });
   };
-  // PRODUCT TYPE
-  const productTypes = [
-    "Electronics",
-    "Fashion",
-    "Home & Kitchen",
-    "Beauty & Personal Care",
-    "Sports & Outdoors",
-    "Toys & Games",
-    "Health & Wellness",
-    "Groceries & Food ",
-    "Automotive",
-    "Books & Media ",
-  ];
+
   useEffect(() => {
     setTimeout(() => {
       setHasWelcomed(true);
