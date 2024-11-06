@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
-
+import "./ProductListsPage.scss";
 const ProductListsPage = () => {
   const { search } = useLocation(); // extract search part of the URL
   const [currentProductLists, setCurrentProductLists] = useState([]);
