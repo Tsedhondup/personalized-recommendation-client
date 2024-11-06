@@ -18,7 +18,6 @@ const SearchEnginePage = () => {
     axios
       .post(`http://localhost:8080/newProducts`, productListsObject)
       .then((respond) => {
-        console.log(respond);
         /*
          * AFTER SEARCH PRODUCT IS FETCHED AND ADDED TO CURRENT DATA BASE
          * NAVIGATE TO PRODUCT LISTS PAGE
@@ -36,11 +35,7 @@ const SearchEnginePage = () => {
   };
   return (
     <div>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
-      >
+      <form>
         <input
           type="text"
           value={searchInput}
@@ -51,7 +46,8 @@ const SearchEnginePage = () => {
         ></input>
         <button
           type="submit"
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault();
             handleFormSubmit();
           }}
         >

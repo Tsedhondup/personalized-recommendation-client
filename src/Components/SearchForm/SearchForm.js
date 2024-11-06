@@ -37,11 +37,7 @@ const SearchForm = () => {
   };
   return (
     <div>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
-      >
+      <form>
         <input
           type="text"
           value={searchInput}
@@ -52,7 +48,8 @@ const SearchForm = () => {
         ></input>
         <button
           type="submit"
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault();
             handleFormSubmit();
           }}
         >
