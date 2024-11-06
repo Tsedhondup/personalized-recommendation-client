@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
+import "./SearchForm.scss";
 
 const SearchForm = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -36,9 +37,10 @@ const SearchForm = () => {
     // NAVIGATE TO PRODUCT LIST PAGE WITH PRODUCT LISTS OBJECT AS QUERY IN A FORM OF ENCODE STRING
   };
   return (
-    <div>
-      <form>
+    <div className="form-container">
+      <form className="form-container__form">
         <input
+          className="form-container__form--input"
           type="text"
           value={searchInput}
           onChange={(event) => {
@@ -47,6 +49,7 @@ const SearchForm = () => {
           placeholder="enter product name"
         ></input>
         <button
+          className="form-container__form--button"
           type="submit"
           onClick={(event) => {
             event.preventDefault();
