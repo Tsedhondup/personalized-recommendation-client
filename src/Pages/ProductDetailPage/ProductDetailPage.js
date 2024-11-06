@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams, Link, useLocation } from "react-router-dom";
+import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
 const ProductDetailPage = () => {
-  const [productLists, setProductLists] = useState([]);
-  const { productId } = useParams();
+  const [currentProductLists, setCurrentProductLists] = useState([]);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const { search } = useLocation(); // extract search part of the URL
   const query = new URLSearchParams(search); // parses query string
@@ -12,8 +13,7 @@ const ProductDetailPage = () => {
    * decode URL-encoded string,
    * parse and converted back into Object
    */
-  const data = JSON.parse(decodeURIComponent(query.get("data")));
-  console.log(data);
+  const queryData = JSON.parse(decodeURIComponent(query.get("data")));
   // CREATE/UPDATE PREFERENCE SCORE
   const handlePreferences = (productName) => {
     axios
@@ -24,26 +24,45 @@ const ProductDetailPage = () => {
         console.log(err);
       });
   };
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:8080/getCurrentProducts`)
-  //     .then((respond) => {
-  //       setProductLists(respond.data.parsedData);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  const handleNavigateToProductDetailPage = (productId) => {
+    const productListsObject = {
+      productListsId: String(queryData.productListsId),
+      currentProductId: productId,
+    };
+    navigate(
+      `/productDetailPage?data=${encodeURIComponent(
+        JSON.stringify(productListsObject)
+      )}`
+    );
+  };
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/getCurrentProducts`, {
+        params: {
+          productListsId: String(queryData.productListsId),
+        },
+      })
+      .then((respond) => {
+        setCurrentProductLists(respond.data.products[0].productLists);
+      })
+      .then(() => {
+        setHasLoaded(true);
+        window.scrollTo(0, 0);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [location.search]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  if (productLists.length > 0) {
+  if (hasLoaded) {
     return (
       <div className="product-detail">
         <div className="product-detail__current-product">
-          {productLists.map((item) => {
-            if (item.product_id === productId) {
+          {currentProductLists.map((item) => {
+            if (item.product_id === queryData.currentProductId) {
               return (
                 <div className="current-product-item" key={item.product_id}>
                   <div className="current-product-item__image">
@@ -89,33 +108,35 @@ const ProductDetailPage = () => {
         </div>
         <div className="product-detail__next-products">
           <div className="products">
-            {productLists.map((item) => {
-              return (
-                <Link
-                  to={`/${item.product_id}`}
-                  key={item.product_id}
-                  className=""
-                  onClick={() => {
-                    handlePreferences(item.title);
-                  }}
-                >
-                  <img
-                    src={item.thumbnail}
-                    alt={item.title}
-                    className="product-image"
-                  />
-                  <h1>{item.title}</h1>
-                  <h2>price: {item.price}</h2>
-                  <h2>
-                    {item.source}
+            {currentProductLists.map((item) => {
+              if (item.product_id !== queryData.currentProductId) {
+                return (
+                  <div
+                    key={item.product_id}
+                    className=""
+                    onClick={() => {
+                      handlePreferences(item.title);
+                      handleNavigateToProductDetailPage(item.product_id);
+                    }}
+                  >
                     <img
-                      src={item.source_icon}
-                      alt="source-icon"
-                      className="source-icon"
+                      src={item.thumbnail}
+                      alt={item.title}
+                      className="product-image"
                     />
-                  </h2>
-                </Link>
-              );
+                    <h1>{item.title}</h1>
+                    <h2>price: {item.price}</h2>
+                    <h2>
+                      {item.source}
+                      <img
+                        src={item.source_icon}
+                        alt="source-icon"
+                        className="source-icon"
+                      />
+                    </h2>
+                  </div>
+                );
+              }
             })}
           </div>
         </div>
