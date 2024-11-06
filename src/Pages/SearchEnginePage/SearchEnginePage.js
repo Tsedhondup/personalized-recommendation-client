@@ -13,6 +13,12 @@ const SearchEnginePage = () => {
       productListsId: uuidv4(),
       productName: searchInput,
     };
+    // NAVIGATE TO PRODUCT LIST PAGE WITH PRODUCT LISTS OBJECT AS QUERY IN A FORM OF STRING
+    navigate(
+      `/productListPage?data=${encodeURIComponent(
+        JSON.stringify(productListsObject)
+      )}`
+    );
   };
   return (
     <div>
@@ -28,7 +34,13 @@ const SearchEnginePage = () => {
           }}
           placeholder="enter product name"
         ></input>
-        <button>Search</button>
+        <button
+          onClick={() => {
+            handleFormSubmit();
+          }}
+        >
+          Search
+        </button>
       </form>
     </div>
   );
