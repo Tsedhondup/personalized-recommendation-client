@@ -14,8 +14,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* <Route path="/" element={<PreferencesFormPage />} />
-          <Route path="/shop" element={<ShoppingPage />} />
-          <Route path="/:productId" element={<ProductDetails />} /> */}
+          {/* <Route path="/shop" element={<ShoppingPage />} /> */}
+          <Route path="/productDetailPage" element={<ProductDetailPage />} />
           <Route path="/SearchEnginePage" element={<SearchEnginePage />} />
           <Route path="/ProductListsPage" element={<ProductListsPage />} />
         </Routes>

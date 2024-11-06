@@ -1,46 +1,61 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-import "./SearchForm.scss";
 
-const SearchForm = (props) => {
-  const [productName, setProductName] = useState(""); // Controll form should not have undefined value initialy
-  const handleProductName = (e) => {
-    setProductName(e.target.value);
+const SearchForm = () => {
+  const [searchInput, setSearchInput] = useState("");
+  const navigate = useNavigate();
+  const handleSearchInput = (event) => {
+    setSearchInput(event.target.value);
   };
-  const handleFormSubmission = () => {
-    props.setProductLists([]);
+
+  const handleFormSubmit = () => {
+    const productListsObject = {
+      productListsId: uuidv4(),
+      productName: searchInput,
+    };
     axios
-      .get(`http://localhost:8080/products`, {
-        params: {
-          productName: productName.toLocaleLowerCase(),
-        },
-      })
+      .post(`http://localhost:8080/newProducts`, productListsObject)
       .then((respond) => {
-        console.log(respond.data);
-        props.setProductLists(respond.data);
+        if (respond.data.status === "SEARCH COMPLETED") {
+          navigate(
+            `/ProductListsPage?data=${encodeURIComponent(
+              JSON.stringify(productListsObject)
+            )}`
+          );
+        }
+        /*
+         * AFTER SEARCH PRODUCT IS FETCHED AND ADDED TO CURRENT DATA BASE
+         * NAVIGATE TO PRODUCT LISTS PAGE
+         */
       })
       .catch((err) => {
         console.log(err);
       });
+    // NAVIGATE TO PRODUCT LIST PAGE WITH PRODUCT LISTS OBJECT AS QUERY IN A FORM OF ENCODE STRING
   };
   return (
     <div>
       <form
-        className="form"
         onSubmit={(event) => {
           event.preventDefault();
-          handleFormSubmission();
         }}
       >
         <input
-          className="form__input"
           type="text"
-          value={productName}
-          onChange={(e) => {
-            handleProductName(e);
+          value={searchInput}
+          onChange={(event) => {
+            handleSearchInput(event);
           }}
+          placeholder="enter product name"
         ></input>
-        <button type="submit" className="form__button">
+        <button
+          type="submit"
+          onClick={() => {
+            handleFormSubmit();
+          }}
+        >
           Search
         </button>
       </form>
