@@ -50,7 +50,7 @@ const PreferencesFormPage = () => {
         return respond;
       })
       .then(() => {
-        navigate("/shop");
+        navigate("/SearchEnginePage");
       })
       .catch((err) => {
         console.log(err);
@@ -127,7 +127,7 @@ const PreferencesFormPage = () => {
           </button>
           <button
             onClick={() => {
-              navigate("/shop");
+              navigate("/SearchEnginePage");
             }}
           >
             skip
