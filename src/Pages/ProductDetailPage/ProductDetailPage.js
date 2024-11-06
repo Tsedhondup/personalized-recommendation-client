@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import SearchForm from "../../Components/SearchForm/SearchForm";
 const ProductDetailPage = () => {
   const [currentProductLists, setCurrentProductLists] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -59,85 +60,89 @@ const ProductDetailPage = () => {
   }, []);
   if (hasLoaded) {
     return (
-      <div className="product-detail">
-        <div className="product-detail__current-product">
-          {currentProductLists.map((item) => {
-            if (item.product_id === queryData.currentProductId) {
-              return (
-                <div className="current-product-item" key={item.product_id}>
-                  <div className="current-product-item__image">
-                    <img src={item.thumbnail} alt="product-image" />
-                  </div>
-                  <div className="current-product-item__info">
-                    <h1>{item.title}</h1>
-                    <h2>{`Brand: ${item.source}`}</h2>
-                    <h2>{`Rating: ${item.rating}`}</h2>
-                    <img src={item.source_icon} alt="brand-logo" />
-                    <h2>{item.price}</h2>
-                    <a
-                      href={item.product_link}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={() => {
-                        handlePreferences(item.title);
-                      }}
-                    >
-                      Buy
-                    </a>
-                    <h2>{`Delivery: ${item.delivery}`}</h2>
-                    <h2>{`Reviews: ${item.reviews}`}</h2>
-                    <button
-                      onClick={() => {
-                        handlePreferences(item.title);
-                      }}
-                    >
-                      Add to card
-                    </button>
-                    <button
-                      onClick={() => {
-                        handlePreferences(item.title);
-                      }}
-                    >
-                      like
-                    </button>
-                  </div>
-                </div>
-              );
-            }
-          })}
-        </div>
-        <div className="product-detail__next-products">
-          <div className="products">
+      <div>
+        {" "}
+        <SearchForm />
+        <div className="product-detail">
+          <div className="product-detail__current-product">
             {currentProductLists.map((item) => {
-              if (item.product_id !== queryData.currentProductId) {
+              if (item.product_id === queryData.currentProductId) {
                 return (
-                  <div
-                    key={item.product_id}
-                    className=""
-                    onClick={() => {
-                      handlePreferences(item.title);
-                      handleNavigateToProductDetailPage(item.product_id);
-                    }}
-                  >
-                    <img
-                      src={item.thumbnail}
-                      alt={item.title}
-                      className="product-image"
-                    />
-                    <h1>{item.title}</h1>
-                    <h2>price: {item.price}</h2>
-                    <h2>
-                      {item.source}
-                      <img
-                        src={item.source_icon}
-                        alt="source-icon"
-                        className="source-icon"
-                      />
-                    </h2>
+                  <div className="current-product-item" key={item.product_id}>
+                    <div className="current-product-item__image">
+                      <img src={item.thumbnail} alt="product-image" />
+                    </div>
+                    <div className="current-product-item__info">
+                      <h1>{item.title}</h1>
+                      <h2>{`Brand: ${item.source}`}</h2>
+                      <h2>{`Rating: ${item.rating}`}</h2>
+                      <img src={item.source_icon} alt="brand-logo" />
+                      <h2>{item.price}</h2>
+                      <a
+                        href={item.product_link}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={() => {
+                          handlePreferences(item.title);
+                        }}
+                      >
+                        Buy
+                      </a>
+                      <h2>{`Delivery: ${item.delivery}`}</h2>
+                      <h2>{`Reviews: ${item.reviews}`}</h2>
+                      <button
+                        onClick={() => {
+                          handlePreferences(item.title);
+                        }}
+                      >
+                        Add to card
+                      </button>
+                      <button
+                        onClick={() => {
+                          handlePreferences(item.title);
+                        }}
+                      >
+                        like
+                      </button>
+                    </div>
                   </div>
                 );
               }
             })}
+          </div>
+          <div className="product-detail__next-products">
+            <div className="products">
+              {currentProductLists.map((item) => {
+                if (item.product_id !== queryData.currentProductId) {
+                  return (
+                    <div
+                      key={item.product_id}
+                      className=""
+                      onClick={() => {
+                        handlePreferences(item.title);
+                        handleNavigateToProductDetailPage(item.product_id);
+                      }}
+                    >
+                      <img
+                        src={item.thumbnail}
+                        alt={item.title}
+                        className="product-image"
+                      />
+                      <h1>{item.title}</h1>
+                      <h2>price: {item.price}</h2>
+                      <h2>
+                        {item.source}
+                        <img
+                          src={item.source_icon}
+                          alt="source-icon"
+                          className="source-icon"
+                        />
+                      </h2>
+                    </div>
+                  );
+                }
+              })}
+            </div>
           </div>
         </div>
       </div>

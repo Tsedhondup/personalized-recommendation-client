@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ProductListsPage.scss";
 import SearchForm from "../../Components/SearchForm/SearchForm";
