@@ -13,7 +13,7 @@ const SearchEnginePage = () => {
       productListsId: uuidv4(),
       productName: searchInput,
     };
-    // NAVIGATE TO PRODUCT LIST PAGE WITH PRODUCT LISTS OBJECT AS QUERY IN A FORM OF STRING
+    // NAVIGATE TO PRODUCT LIST PAGE WITH PRODUCT LISTS OBJECT AS QUERY IN A FORM OF ENCODE STRING
     navigate(
       `/productListPage?data=${encodeURIComponent(
         JSON.stringify(productListsObject)
