@@ -105,6 +105,7 @@ const PreferencesFormPage = () => {
           {productTypes.map((item, index) => {
             return (
               <li
+                className="product-type"
                 key={index}
                 onClick={() => {
                   handleProductTypes(item);
