@@ -15,7 +15,7 @@ const SearchEnginePage = () => {
     };
     // NAVIGATE TO PRODUCT LIST PAGE WITH PRODUCT LISTS OBJECT AS QUERY IN A FORM OF ENCODE STRING
     navigate(
-      `/productListPage?data=${encodeURIComponent(
+      `/ProductListsPage?data=${encodeURIComponent(
         JSON.stringify(productListsObject)
       )}`
     );
@@ -23,11 +23,12 @@ const SearchEnginePage = () => {
   return (
     <div>
       <form
-        onSubmit={(event) => {
-          event.preventDefault();
+        onSubmit={() => {
+          handleFormSubmit();
         }}
       >
         <input
+          type="text"
           value={searchInput}
           onChange={(event) => {
             handleSearchInput(event);
@@ -35,6 +36,7 @@ const SearchEnginePage = () => {
           placeholder="enter product name"
         ></input>
         <button
+          type="submit"
           onClick={() => {
             handleFormSubmit();
           }}

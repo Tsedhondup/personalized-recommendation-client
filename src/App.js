@@ -5,6 +5,8 @@ import PreferencesFormPage from "./Pages/PreferencesFormPage/PreferencesFormPage
 import ShoppingPage from "./Pages/ShoppingPage/ShoppingPage";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import SearchEnginePage from "./Pages/SearchEnginePage/SearchEnginePage";
+import ProductDetailPage from "./Pages/ProductDetailPage/ProductDetailPage";
+import ProductListsPage from "./Pages/ProductListsPage/ProductListsPage";
 function App() {
   return (
     <>
@@ -15,6 +17,7 @@ function App() {
           <Route path="/shop" element={<ShoppingPage />} />
           <Route path="/:productId" element={<ProductDetails />} />
           <Route path="/SearchEnginePage" element={<SearchEnginePage />} />
+          <Route path="/ProductListsPage" element={<ProductListsPage />} />
         </Routes>
       </BrowserRouter>
     </>
