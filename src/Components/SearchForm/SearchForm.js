@@ -15,6 +15,7 @@ const SearchForm = () => {
     const productListsObject = {
       productListsId: uuidv4(),
       productName: searchInput,
+      userId: sessionStorage.getItem("userId"),
     };
     axios
       .post(`http://localhost:8080/newProducts`, productListsObject)
