@@ -59,6 +59,7 @@ const ProductDetailPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   if (hasLoaded) {
     return (
       <div>

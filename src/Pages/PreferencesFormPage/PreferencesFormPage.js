@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+
 import axios from "axios";
 import "./PreferencesFormPage.scss";
 import { productTypes } from "../../utilities/productType";
@@ -36,6 +38,10 @@ const PreferencesFormPage = () => {
     setAgreementELClass("js-agreement-show");
   };
   const handlePreferencesPost = (productName) => {
+    // SET TEMPORARY USER ID
+    sessionStorage.setItem("userId", uuidv4());
+    const userId = sessionStorage.getItem("userId");
+
     // ADD PREFERENCE SCORE TO PRODUCT TYPE
     const customProductTypes = preferedProducts.map((item) => {
       const productObject = {
@@ -45,9 +51,9 @@ const PreferencesFormPage = () => {
       return productObject;
     });
     axios
-      .post(`http://localhost:8080/addCustomPreferences`, customProductTypes)
-      .then((respond) => {
-        return respond;
+      .post(`http://localhost:8080/addCustomPreferences`, {
+        userId,
+        customProductTypes,
       })
       .then(() => {
         navigate("/SearchEnginePage");
