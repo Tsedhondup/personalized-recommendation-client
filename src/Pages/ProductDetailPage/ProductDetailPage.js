@@ -21,6 +21,7 @@ const ProductDetailPage = () => {
     axios
       .post(`http://localhost:8080/preferences`, {
         productName: productName.toLocaleLowerCase(),
+        userId: sessionStorage.getItem("userId"),
       })
       .catch((err) => {
         console.log(err);
