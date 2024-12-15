@@ -5,10 +5,10 @@ import "./RecommendationLists.scss";
 const RecommendationLists = () => {
   const navigate = useNavigate();
   const [recommendationLists, setRecommendationLists] = useState([]);
-  const handleNavigateToProductDetailPage = (event) => {
+  const handleNavigateToProductDetailPage = (productId) => {
     const productListsObject = {
       source: "mainPersonalized",
-      currentProductId: event.target.key,
+      pId: productId,
     };
     navigate(
       `/productDetailPage?data=${encodeURIComponent(
@@ -50,8 +50,8 @@ const RecommendationLists = () => {
                 href={product.link}
                 target="_blank"
                 rel="noreferrer"
-                onClick={(event) => {
-                  handleNavigateToProductDetailPage(event);
+                onClick={() => {
+                  handleNavigateToProductDetailPage(product.id);
                 }}
               >
                 <img

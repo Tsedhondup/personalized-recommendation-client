@@ -8,6 +8,8 @@ const ProductDetailPage = () => {
   const [currentProductLists, setCurrentProductLists] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
   const navigate = useNavigate();
+
+  // PARSING DATA FROM URL
   const location = useLocation();
   const { search } = useLocation(); // extract search part of the URL
   const query = new URLSearchParams(search); // parses query string
@@ -17,6 +19,7 @@ const ProductDetailPage = () => {
    * parse and converted back into Object
    */
   const queryData = JSON.parse(decodeURIComponent(query.get("data")));
+  console.log(queryData);
   // CREATE/UPDATE PREFERENCE SCORE
   const handlePreferences = (productName) => {
     axios
@@ -39,24 +42,24 @@ const ProductDetailPage = () => {
       )}`
     );
   };
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/getCurrentProducts`, {
-        params: {
-          productListsId: String(queryData.productListsId),
-        },
-      })
-      .then((respond) => {
-        setCurrentProductLists(respond.data.products[0].productLists);
-      })
-      .then(() => {
-        setHasLoaded(true);
-        window.scrollTo(0, 0);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [location.search]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:8080/getCurrentProducts`, {
+  //       params: {
+  //         productListsId: String(queryData.productListsId),
+  //       },
+  //     })
+  //     .then((respond) => {
+  //       setCurrentProductLists(respond.data.products[0].productLists);
+  //     })
+  //     .then(() => {
+  //       setHasLoaded(true);
+  //       window.scrollTo(0, 0);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [location.search]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
