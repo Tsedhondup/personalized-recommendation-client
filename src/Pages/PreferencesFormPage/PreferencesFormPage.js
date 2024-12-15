@@ -57,7 +57,11 @@ const PreferencesFormPage = () => {
         products: customProductTypes,
       })
       .then((respond) => {
-        localStorage.setItem("pprSID*", respond.data.sessionId);
+        const clientData = {
+          clientId: respond.data.user_id,
+          sessionId: respond.data.sessionId,
+        };
+        localStorage.setItem("pprSID*", JSON.stringify(clientData));
         navigate("/SearchEnginePage");
       })
       .catch((err) => {

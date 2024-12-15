@@ -3,21 +3,24 @@ import axios from "axios";
 import "./RecommendationLists.scss";
 const RecommendationLists = () => {
   const [recommendationLists, setRecommendationLists] = useState([]);
+  // console.log(JSON.parse(localStorage.getItem("pprSID*")).clientId);
+  // console.log(JSON.parse(localStorage.getItem("pprSID*")).sessionId);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getRecommendations`, {
+      .get(`http://localhost:8080/mainPersonalized`, {
         params: {
-          userId: sessionStorage.getItem("userId"),
+          userId: JSON.parse(localStorage.getItem("pprSID*")).clientId,
+          sessionId: JSON.parse(localStorage.getItem("pprSID*")).sessionId,
         },
       })
       .then((respond) => {
-        // console.log(respond.data);
         setRecommendationLists(respond.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
   if (!recommendationLists.length > 0) {
     return (
       <div>
@@ -28,33 +31,35 @@ const RecommendationLists = () => {
     return (
       <div className="recommendations">
         {recommendationLists.map((item) => {
-          return (
-            <a
-              className="recommendations__item"
-              key={item.id}
-              href={item.link}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <h2>{item.title}</h2>
-              <img
-                src={item.image}
-                alt="img"
-                className="recommendations__item--thumbnail"
-              />
-              <h2>
-                {item.source}{" "}
+          return item.productData.map((product) => {
+            return (
+              <a
+                className="recommendations__item"
+                key={product.id}
+                href={product.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <h2>{product.title}</h2>
                 <img
-                  src={item.source_logo}
-                  alt="logo"
-                  className="recommendations__item--logo"
+                  src={product.image}
+                  alt="img"
+                  className="recommendations__item--thumbnail"
                 />
-              </h2>
-              <h3>{item.price}</h3>
-              <p>{item.review}</p>
-              <p>{item.snippet}</p>
-            </a>
-          );
+                <h2>
+                  {product.source}
+                  <img
+                    src={product.source_logo}
+                    alt="logo"
+                    className="recommendations__item--logo"
+                  />
+                </h2>
+                <h3>{product.price}</h3>
+                <h3>{product.rating}</h3>
+                <p>{product.review}</p>
+              </a>
+            );
+          });
         })}
       </div>
     );
