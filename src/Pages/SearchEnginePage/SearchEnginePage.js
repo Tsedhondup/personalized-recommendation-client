@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
+import RecommendationLists from "../../Components/RecommendationLists/RecommendationLists";
 
 const SearchEnginePage = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -55,6 +56,7 @@ const SearchEnginePage = () => {
           Search
         </button>
       </form>
+      <RecommendationLists />
     </div>
   );
 };

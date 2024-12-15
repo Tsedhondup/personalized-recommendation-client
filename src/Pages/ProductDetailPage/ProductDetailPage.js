@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchForm from "../../Components/SearchForm/SearchForm";
+import RecommendationLists from "../../Components/RecommendationLists/RecommendationLists";
 import "./ProductDetailPage.scss";
 const ProductDetailPage = () => {
   const [currentProductLists, setCurrentProductLists] = useState([]);

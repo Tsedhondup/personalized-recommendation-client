@@ -5,8 +5,13 @@ const RecommendationLists = () => {
   const [recommendationLists, setRecommendationLists] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/recommendations`)
+      .get(`http://localhost:8080/getRecommendations`, {
+        params: {
+          userId: sessionStorage.getItem("userId"),
+        },
+      })
       .then((respond) => {
+        // console.log(respond.data);
         setRecommendationLists(respond.data);
       })
       .catch((err) => {

@@ -37,7 +37,7 @@ const PreferencesFormPage = () => {
   const handleAgreementElClass = () => {
     setAgreementELClass("js-agreement-show");
   };
-  const handlePreferencesPost = (productName) => {
+  const handlePreferencesPost = async (productName) => {
     // SET TEMPORARY USER ID
     sessionStorage.setItem("userId", uuidv4());
     const userId = sessionStorage.getItem("userId");
@@ -50,12 +50,14 @@ const PreferencesFormPage = () => {
       };
       return productObject;
     });
-    axios
-      .post(`http://localhost:8080/addCustomPreferences`, {
+    console.log(customProductTypes);
+    await axios
+      .post(`http://localhost:8080/user`, {
         userId,
-        customProductTypes,
+        products: customProductTypes,
       })
-      .then(() => {
+      .then((respond) => {
+        localStorage.setItem("pprSID*", respond.data.sessionId);
         navigate("/SearchEnginePage");
       })
       .catch((err) => {
@@ -67,6 +69,14 @@ const PreferencesFormPage = () => {
     setTimeout(() => {
       setHasWelcomed(true);
     }, 100);
+  }, []);
+
+  // CHECK CLIENT IS RETURNING USERS
+  useEffect(() => {
+    // personalized-product-recommendation-session-id
+    if (localStorage.getItem("pprSID*")) {
+      navigate("/SearchEnginePage");
+    }
   }, []);
   if (hasWelcomed) {
     return (
