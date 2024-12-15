@@ -40,12 +40,12 @@ const RecommendationLists = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <h2>{product.title}</h2>
                 <img
                   src={product.image}
                   alt="img"
                   className="recommendations__item--thumbnail"
                 />
+                <h2>{product.title}</h2>
                 <h2>
                   {product.source}
                   <img
@@ -55,8 +55,7 @@ const RecommendationLists = () => {
                   />
                 </h2>
                 <h3>{product.price}</h3>
-                <h3>{product.rating}</h3>
-                <p>{product.review}</p>
+                <h3>rating: ${product.rating}</h3>
               </a>
             );
           });
