@@ -1,10 +1,21 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./RecommendationLists.scss";
 const RecommendationLists = () => {
+  const navigate = useNavigate();
   const [recommendationLists, setRecommendationLists] = useState([]);
-  // console.log(JSON.parse(localStorage.getItem("pprSID*")).clientId);
-  // console.log(JSON.parse(localStorage.getItem("pprSID*")).sessionId);
+  const handleNavigateToProductDetailPage = (event) => {
+    const productListsObject = {
+      source: "mainPersonalized",
+      currentProductId: event.target.key,
+    };
+    navigate(
+      `/productDetailPage?data=${encodeURIComponent(
+        JSON.stringify(productListsObject)
+      )}`
+    );
+  };
   useEffect(() => {
     axios
       .get(`http://localhost:8080/mainPersonalized`, {
@@ -33,12 +44,15 @@ const RecommendationLists = () => {
         {recommendationLists.map((item) => {
           return item.productData.map((product) => {
             return (
-              <a
+              <div
                 className="recommendations__item"
                 key={product.id}
                 href={product.link}
                 target="_blank"
                 rel="noreferrer"
+                onClick={(event) => {
+                  handleNavigateToProductDetailPage(event);
+                }}
               >
                 <img
                   src={product.image}
@@ -56,7 +70,7 @@ const RecommendationLists = () => {
                 </h2>
                 <h3>{product.price}</h3>
                 <h3>rating: ${product.rating}</h3>
-              </a>
+              </div>
             );
           });
         })}
