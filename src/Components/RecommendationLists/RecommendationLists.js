@@ -7,7 +7,7 @@ const RecommendationLists = () => {
   const [recommendationLists, setRecommendationLists] = useState([]);
   const handleNavigateToProductDetailPage = (productId) => {
     const productListsObject = {
-      source: "mainPersonalized",
+      src: "mainPersonalized",
       pId: productId,
     };
     navigate(

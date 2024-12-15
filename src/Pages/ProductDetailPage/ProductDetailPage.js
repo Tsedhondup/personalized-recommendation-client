@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SearchForm from "../../Components/SearchForm/SearchForm";
 import RecommendationLists from "../../Components/RecommendationLists/RecommendationLists";
+import MainPersonalizedDetails from "../../Components/MainPeronalizedDetails/MainPersonalizedDetails";
 import "./ProductDetailPage.scss";
 const ProductDetailPage = () => {
   const [currentProductLists, setCurrentProductLists] = useState([]);
@@ -19,7 +20,6 @@ const ProductDetailPage = () => {
    * parse and converted back into Object
    */
   const queryData = JSON.parse(decodeURIComponent(query.get("data")));
-  console.log(queryData);
   // CREATE/UPDATE PREFERENCE SCORE
   const handlePreferences = (productName) => {
     axios
