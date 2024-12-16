@@ -11,7 +11,7 @@ const RecommendationLists = () => {
       pId: productId,
     };
     navigate(
-      `/productDetailPage?data=${encodeURIComponent(
+      `/mainPersonalizedDetailPage?data=${encodeURIComponent(
         JSON.stringify(productListsObject)
       )}`
     );

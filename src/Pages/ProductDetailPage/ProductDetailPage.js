@@ -42,115 +42,100 @@ const ProductDetailPage = () => {
       )}`
     );
   };
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:8080/getCurrentProducts`, {
-  //       params: {
-  //         productListsId: String(queryData.productListsId),
-  //       },
-  //     })
-  //     .then((respond) => {
-  //       setCurrentProductLists(respond.data.products[0].productLists);
-  //     })
-  //     .then(() => {
-  //       setHasLoaded(true);
-  //       window.scrollTo(0, 0);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [location.search]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  if (hasLoaded) {
-    return (
-      <div>
-        <SearchForm />
-        <div className="product-detail">
-          {currentProductLists.map((item) => {
-            if (item.product_id === queryData.currentProductId) {
-              return (
-                <div className="current-product-item" key={item.product_id}>
-                  <div className="current-product-item__image">
-                    <img src={item.thumbnail} alt="product-image" />
-                  </div>
-                  <div className="current-product-item__info">
-                    <h1>{item.title}</h1>
-                    <h2>{`Brand: ${item.source}`}</h2>
-                    <h2>{`Rating: ${item.rating}`}</h2>
-                    <img src={item.source_icon} alt="brand-logo" />
-                    <h2>{item.price}</h2>
-                    <a
-                      href={item.product_link}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={() => {
-                        handlePreferences(item.title);
-                      }}
-                    >
-                      Buy
-                    </a>
-                    <h2>{`Delivery: ${item.delivery}`}</h2>
-                    <h2>{`Reviews: ${item.reviews}`}</h2>
-                    <button
-                      onClick={() => {
-                        handlePreferences(item.title);
-                      }}
-                    >
-                      Add to card
-                    </button>
-                    <button
-                      onClick={() => {
-                        handlePreferences(item.title);
-                      }}
-                    >
-                      like
-                    </button>
-                  </div>
-                </div>
-              );
-            }
-          })}
-          <div className="product-detail__next-products">
-            <div className="products">
-              {currentProductLists.map((item) => {
-                if (item.product_id !== queryData.currentProductId) {
-                  return (
-                    <div
-                      key={item.product_id}
-                      className=""
-                      onClick={() => {
-                        handlePreferences(item.title);
-                        handleNavigateToProductDetailPage(item.product_id);
-                      }}
-                    >
-                      <img
-                        src={item.thumbnail}
-                        alt={item.title}
-                        className="product-image"
-                      />
-                      <h1>{item.title}</h1>
-                      <h2>price: {item.price}</h2>
-                      <h2>
-                        {item.source}
-                        <img
-                          src={item.source_icon}
-                          alt="source-icon"
-                          className="source-icon"
-                        />
-                      </h2>
+  if (queryData.src === "mainPersonalized") {
+    return <MainPersonalizedDetails queryData={queryData} />;
+  } else {
+    if (hasLoaded) {
+      return (
+        <div>
+          <SearchForm />
+          <div className="product-detail">
+            {currentProductLists.map((item) => {
+              if (item.product_id === queryData.currentProductId) {
+                return (
+                  <div className="current-product-item" key={item.product_id}>
+                    <div className="current-product-item__image">
+                      <img src={item.thumbnail} alt="product-image" />
                     </div>
-                  );
-                }
-              })}
+                    <div className="current-product-item__info">
+                      <h1>{item.title}</h1>
+                      <h2>{`Brand: ${item.source}`}</h2>
+                      <h2>{`Rating: ${item.rating}`}</h2>
+                      <img src={item.source_icon} alt="brand-logo" />
+                      <h2>{item.price}</h2>
+                      <a
+                        href={item.product_link}
+                        target="_blank"
+                        rel="noreferrer"
+                        onClick={() => {
+                          handlePreferences(item.title);
+                        }}
+                      >
+                        Buy
+                      </a>
+                      <h2>{`Delivery: ${item.delivery}`}</h2>
+                      <h2>{`Reviews: ${item.reviews}`}</h2>
+                      <button
+                        onClick={() => {
+                          handlePreferences(item.title);
+                        }}
+                      >
+                        Add to card
+                      </button>
+                      <button
+                        onClick={() => {
+                          handlePreferences(item.title);
+                        }}
+                      >
+                        like
+                      </button>
+                    </div>
+                  </div>
+                );
+              }
+            })}
+            <div className="product-detail__next-products">
+              <div className="products">
+                {currentProductLists.map((item) => {
+                  if (item.product_id !== queryData.currentProductId) {
+                    return (
+                      <div
+                        key={item.product_id}
+                        className=""
+                        onClick={() => {
+                          handlePreferences(item.title);
+                          handleNavigateToProductDetailPage(item.product_id);
+                        }}
+                      >
+                        <img
+                          src={item.thumbnail}
+                          alt={item.title}
+                          className="product-image"
+                        />
+                        <h1>{item.title}</h1>
+                        <h2>price: {item.price}</h2>
+                        <h2>
+                          {item.source}
+                          <img
+                            src={item.source_icon}
+                            alt="source-icon"
+                            className="source-icon"
+                          />
+                        </h2>
+                      </div>
+                    );
+                  }
+                })}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 };
 export default ProductDetailPage;

@@ -5,6 +5,8 @@ import PreferencesFormPage from "./Pages/PreferencesFormPage/PreferencesFormPage
 import SearchEnginePage from "./Pages/SearchEnginePage/SearchEnginePage";
 import ProductDetailPage from "./Pages/ProductDetailPage/ProductDetailPage";
 import ProductListsPage from "./Pages/ProductListsPage/ProductListsPage";
+// import MainPersonalizedDetailPage from "./Pages/mainPersonalizedDetailPage/MainPersonalizedDetailPage";
+import MainPersonalizedDetailPage from "./Pages/MainPersonalizedDetailPage/MainPersonalizedDetailPage";
 function App() {
   return (
     <>
@@ -15,6 +17,10 @@ function App() {
           <Route path="/productDetailPage" element={<ProductDetailPage />} />
           <Route path="/SearchEnginePage" element={<SearchEnginePage />} />
           <Route path="/ProductListsPage" element={<ProductListsPage />} />
+          <Route
+            path="/mainPersonalizedDetailPage"
+            element={<MainPersonalizedDetailPage />}
+          />
         </Routes>
       </BrowserRouter>
     </>
