@@ -5,16 +5,14 @@ import axios from "axios";
 const MainPersonalizedDetails = (props) => {
   const navigate = useNavigate();
   const [personalizedLists, setPersonalizedLists] = useState([]);
-  const [currentProduct, setCurrentProduct] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
-
   const handleNavigateToProductDetailPage = (productId) => {
     const productListsObject = {
       src: "mainPersonalized",
       pId: productId,
     };
     navigate(
-      `/productDetailPage?data=${encodeURIComponent(
+      `/mainPersonalizedDetailPage?data=${encodeURIComponent(
         JSON.stringify(productListsObject)
       )}`
     );
@@ -27,13 +25,6 @@ const MainPersonalizedDetails = (props) => {
         },
       })
       .then((respond) => {
-        setCurrentProduct(
-          respond.data.map((item) => {
-            return item.productData.filter((product) => {
-              return product.id === props.queryData.pId;
-            });
-          })
-        );
         setPersonalizedLists(respond.data);
       })
       .then(() => {
@@ -46,8 +37,8 @@ const MainPersonalizedDetails = (props) => {
       <div>
         <div>
           <div className="recommendations">
-            {currentProduct.map((product) => {
-              return product.map((item) => {
+            {personalizedLists[0].productData.map((item) => {
+              if (item.id === props.queries.pId) {
                 return (
                   <div
                     className="recommendations__item"
@@ -74,14 +65,14 @@ const MainPersonalizedDetails = (props) => {
                     <h3>rating: ${item.rating}</h3>
                   </div>
                 );
-              });
+              }
             })}
           </div>
         </div>
         <div className="recommendations">
           {personalizedLists.map((item) => {
             return item.productData.map((product) => {
-              if (product.id !== props.queryData.pId) {
+              if (product.id !== props.queries.pId) {
                 return (
                   <div
                     className="recommendations__item"
