@@ -24,12 +24,11 @@ const SearchEnginePage = () => {
          * AFTER SEARCH PRODUCT IS FETCHED AND ADDED TO CURRENT DATA BASE
          * NAVIGATE TO PRODUCT LISTS PAGE
          */
-        const item = {
-          name: searchInput,
-          id: respond.data.itemId,
-        };
+
         navigate(
-          `/ProductListsPage?data=${encodeURIComponent(JSON.stringify(item))}`
+          `/ProductListsPage?data=${encodeURIComponent(
+            JSON.stringify(respond.data.itemId)
+          )}`
         );
       })
       .catch((err) => {
