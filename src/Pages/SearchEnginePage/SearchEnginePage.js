@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import RecommendationLists from "../../Components/RecommendationLists/RecommendationLists";
 
@@ -12,22 +11,25 @@ const SearchEnginePage = () => {
   };
 
   const handleFormSubmit = () => {
-    const productListsObject = {
-      productListsId: uuidv4(),
-      productName: searchInput,
-      userId: sessionStorage.getItem("userId"),
-    };
     axios
-      .post(`http://localhost:8080/newProducts`, productListsObject)
+      .get(`http://localhost:8080/newProduct`, {
+        params: {
+          userId: JSON.parse(localStorage.getItem("pprSID*")).clientId,
+          sessionId: JSON.parse(localStorage.getItem("pprSID*")).sessionId,
+          currentSearch: searchInput,
+        },
+      })
       .then((respond) => {
         /*
          * AFTER SEARCH PRODUCT IS FETCHED AND ADDED TO CURRENT DATA BASE
          * NAVIGATE TO PRODUCT LISTS PAGE
          */
+        const item = {
+          name: searchInput,
+          id: respond.data.itemId,
+        };
         navigate(
-          `/ProductListsPage?data=${encodeURIComponent(
-            JSON.stringify(productListsObject)
-          )}`
+          `/ProductListsPage?data=${encodeURIComponent(JSON.stringify(item))}`
         );
       })
       .catch((err) => {
