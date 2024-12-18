@@ -37,35 +37,40 @@ const MainPersonalizedDetails = (props) => {
       <div>
         <div>
           <div className="recommendations">
-            {personalizedLists[0].productData.map((item) => {
-              if (item.id === props.queries.pId) {
-                return (
-                  <div
-                    className="recommendations__item"
-                    key={item.id}
-                    href={item.link}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img
-                      src={item.image}
-                      alt="img"
-                      className="recommendations__item--thumbnail"
-                    />
-                    <h2>{item.title}</h2>
-                    <h2>
-                      {item.source}
+            {personalizedLists.map((item) => {
+              return item.productData.map((product) => {
+                if (product.id === props.queries.pId) {
+                  return (
+                    <div
+                      className="recommendations__item"
+                      key={product.id}
+                      href={product.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => {
+                        handleNavigateToProductDetailPage(product.id);
+                      }}
+                    >
                       <img
-                        src={item.source_logo}
-                        alt="logo"
-                        className="recommendations__item--logo"
+                        src={product.image}
+                        alt="img"
+                        className="recommendations__item--thumbnail"
                       />
-                    </h2>
-                    <h3>{item.price}</h3>
-                    <h3>rating: ${item.rating}</h3>
-                  </div>
-                );
-              }
+                      <h2>{product.title}</h2>
+                      <h2>
+                        {product.source}
+                        <img
+                          src={product.source_logo}
+                          alt="logo"
+                          className="recommendations__item--logo"
+                        />
+                      </h2>
+                      <h3>{product.price}</h3>
+                      <h3>rating: ${product.rating}</h3>
+                    </div>
+                  );
+                }
+              });
             })}
           </div>
         </div>
