@@ -18,9 +18,10 @@ const ProductList = (props) => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/currentData`)
+      .get(`http://localhost:8080/currentSearchData`)
       .then((respond) => {
-        setCurrentProductLists(respond.data.parsedData);
+        // setCurrentProductLists(respond.data);
+        console.log(respond.data)
       })
       .catch((err) => {
         console.log(err);

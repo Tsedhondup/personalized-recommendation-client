@@ -24,7 +24,6 @@ const SearchEnginePage = () => {
          * AFTER SEARCH PRODUCT IS FETCHED AND ADDED TO CURRENT DATA BASE
          * NAVIGATE TO PRODUCT LISTS PAGE
          */
-
         navigate(
           `/ProductListsPage?data=${encodeURIComponent(
             JSON.stringify(respond.data.itemId)

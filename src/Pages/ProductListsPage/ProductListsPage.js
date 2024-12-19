@@ -19,13 +19,14 @@ const ProductListsPage = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getCurrentProducts`, {
+      .get(`http://localhost:8080/currentSearchData`, {
         params: {
-          productListsId: String(data.productListsId),
+          currentSearchId: data,
+          sessionId: JSON.parse(localStorage.getItem("pprSID*")).sessionId,
         },
       })
       .then((respond) => {
-        setCurrentProductLists(respond.data.products[0].productLists);
+        setCurrentProductLists(respond.data[0].searchData);
       })
       .then(() => {
         setHasLoaded(true);
@@ -55,14 +56,14 @@ const ProductListsPage = () => {
           {currentProductLists.map((item) => {
             return (
               <div
-                key={item.product_id}
+                key={item.id}
                 className=""
                 onClick={() => {
                   handleNavigateToProductDetailPage(item.product_id);
                 }}
               >
                 <img
-                  src={item.thumbnail}
+                  src={item.image}
                   alt={item.title}
                   className="product-image"
                 />
@@ -71,7 +72,7 @@ const ProductListsPage = () => {
                 <h2>
                   {item.source}
                   <img
-                    src={item.source_icon}
+                    src={item.source_logo}
                     alt="source-icon"
                     className="source-icon"
                   />
