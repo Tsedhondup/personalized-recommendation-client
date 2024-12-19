@@ -16,6 +16,8 @@ const ProductListsPage = () => {
   const data = JSON.parse(decodeURIComponent(query.get("data")));
   //   const [queryString, setQueryString] = useState(location.search);
   const [currentProductLists, setCurrentProductLists] = useState([]);
+  const [currentProductSearchOrigin, setCurrentProductSearchOrigin] =
+    useState("");
   const [hasLoaded, setHasLoaded] = useState(false);
   useEffect(() => {
     axios
@@ -27,6 +29,7 @@ const ProductListsPage = () => {
       })
       .then((respond) => {
         setCurrentProductLists(respond.data[0].searchData);
+        setCurrentProductSearchOrigin(respond.data[0].searchOrigin);
       })
       .then(() => {
         setHasLoaded(true);
@@ -57,6 +60,7 @@ const ProductListsPage = () => {
             return (
               <div
                 key={item.id}
+                data-search-origin={currentProductSearchOrigin}
                 className=""
                 onClick={() => {
                   handleNavigateToProductDetailPage(item.product_id);
