@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ProductListsPage.scss";
 import SearchForm from "../../Components/SearchForm/SearchForm";
 const ProductListsPage = () => {
   const navigate = useNavigate();
+  const productRef = useRef(null);
   const location = useLocation();
   const { search } = useLocation(); // extract search part of the URL
   const query = new URLSearchParams(search); // parses query string
@@ -39,16 +40,17 @@ const ProductListsPage = () => {
       });
   }, [location.search]);
 
-  const handleNavigateToProductDetailPage = (productId) => {
-    const productListsObject = {
-      productListsId: String(data.productListsId),
-      currentProductId: productId,
-    };
-    navigate(
-      `/productDetailPage?data=${encodeURIComponent(
-        JSON.stringify(productListsObject)
-      )}`
-    );
+  const handleNavigateToProductDetailPage = (event, productId) => {
+    // const productListsObject = {
+    //   productListsId: String(data.productListsId),
+    //   currentProductId: productId,
+    // };
+    // navigate(
+    //   `/productDetailPage?data=${encodeURIComponent(
+    //     JSON.stringify(productListsObject)
+    //   )}`
+    // );
+    console.log(productRef.current.dataset);
   };
 
   if (hasLoaded) {
@@ -60,10 +62,11 @@ const ProductListsPage = () => {
             return (
               <div
                 key={item.id}
-                data-search-origin={currentProductSearchOrigin}
+                ref={productRef}
+                data-searchorigin={currentProductSearchOrigin}
                 className=""
-                onClick={() => {
-                  handleNavigateToProductDetailPage(item.product_id);
+                onClick={(event) => {
+                  handleNavigateToProductDetailPage(event, item.product_id);
                 }}
               >
                 <img
