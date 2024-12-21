@@ -40,17 +40,19 @@ const ProductListsPage = () => {
       });
   }, [location.search]);
 
-  const handleNavigateToProductDetailPage = (event, productId) => {
-    // const productListsObject = {
-    //   productListsId: String(data.productListsId),
-    //   currentProductId: productId,
-    // };
-    // navigate(
-    //   `/productDetailPage?data=${encodeURIComponent(
-    //     JSON.stringify(productListsObject)
-    //   )}`
-    // );
-    console.log(productRef.current.dataset);
+  const handleNavigateToProductDetailPage = (productId) => {
+    // to shorten url, use ARRAY for now
+    const productData = [
+      {
+        origin: currentProductSearchOrigin,
+        id: productId,
+      },
+    ];
+    navigate(
+      `/productDetailPage?data=${encodeURIComponent(
+        JSON.stringify(productData[0])
+      )}`
+    );
   };
 
   if (hasLoaded) {
@@ -66,7 +68,7 @@ const ProductListsPage = () => {
                 data-searchorigin={currentProductSearchOrigin}
                 className=""
                 onClick={(event) => {
-                  handleNavigateToProductDetailPage(event, item.product_id);
+                  handleNavigateToProductDetailPage(item.id);
                 }}
               >
                 <img
